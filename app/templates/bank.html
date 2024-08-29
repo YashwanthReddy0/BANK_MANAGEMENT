@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank - Create Account</title>
+    <link rel="stylesheet" href="{% static 'bank.css' %}">
+</head>
+<body>
+    <nav>
+        <div class="logo-container">
+            <img src="{% static 'images/logo.jpeg' %}" alt="Logo">
+            <h1 class="company-name">YR BANK OF NEW ZEALAND</h1>
+        </div>
+        <ul>
+            <li><a href="{% url '1' %}">Create Account</a></li>
+            <li><a href="{% url 'validate_pin' %}">Check Balance</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        {% if account %}
+            <div class="account-details">
+                <h2>Account Created Successfully!</h2>
+                <p>Account Number: {{ account.account_number }}</p>
+                <p>Account Holder Name: {{ account.FirstName }} {{ account.MiddleName }} {{ account.LastName }}</p>
+                <p>Account Type: {{ account.acc_type }}</p>
+                <a href="{% url 'validate_pin' %}" class="button-link">Go to Account</a>
+            </div>
+        {% else %}
+            <h1>Create Account</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.FirstName.label_tag }}
+                    {{ form.FirstName }}
+                </div>
+                <div class="form-group">
+                    {{ form.MiddleName.label_tag }}
+                    {{ form.MiddleName }}
+                </div>
+                <div class="form-group">
+                    {{ form.LastName.label_tag }}
+                    {{ form.LastName }}
+                </div>
+                <div class="form-group">
+                    {{ form.Gender.label_tag }}
+                    {{ form.Gender }}
+                </div>
+                <div class="form-group">
+                    {{ form.acc_type.label_tag }}
+                    {{ form.acc_type }}
+                </div>
+                <div class="form-group">
+                    {{ form.FatherName.label_tag }}
+                    {{ form.FatherName }}
+                </div>
+                <div class="form-group">
+                    {{ form.MotherName.label_tag }}
+                    {{ form.MotherName }}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    {{ form.Adhaar_Number.label_tag }}
+                    {{ form.Adhaar_Number }}
+                </div>
+                <div class="form-group">
+                    {{ form.Address.label_tag }}
+                    {{ form.Address }}
+                </div>
+                <div class="form-group">
+                    {{ form.phoneNumber.label_tag }}
+                    {{ form.phoneNumber }}
+                </div>
+                <div class="form-group">
+                    {{ form.Pin_Number.label_tag }}
+                    {{ form.Pin_Number }}
+                </div>
+                <div class="form-group">
+                    {{ form.Balance_Amount.label_tag }}
+                    {{ form.Balance_Amount }}
+                </div>
+                <button type="submit">Create Bank Account</button>
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>

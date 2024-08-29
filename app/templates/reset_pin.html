@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset PIN</title>
+    <link rel="stylesheet" href="{% static 'history.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Reset PIN</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label for="new_pin">Enter New PIN:</label>
+            <input type="password" name="new_pin" required>
+            <label for="confirm_pin">Confirm New PIN:</label>
+            <input type="password" name="confirm_pin" required>
+            <button type="submit">Reset PIN</button>
+        </form>
+    </div>
+</body>
+</html>

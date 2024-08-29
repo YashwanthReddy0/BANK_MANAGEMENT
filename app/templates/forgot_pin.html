@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot PIN</title>
+    <link rel="stylesheet" href="{% static 'history.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url '1' %}">Create Account</a></li>
+            <li><a href="{% url 'validate_pin' %}">Check Balance</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <h1>Forgot PIN</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label for="account_number">Enter Your Account Number:</label>
+            <input type="text" name="account_number" id="account_number" required>
+            <br>
+            <label>Do you want to receive a verification email?</label>
+            <button type="submit" name="send_email" value="yes">Send Verification Email</button>
+        </form>
+    </div>
+</body>
+</html>

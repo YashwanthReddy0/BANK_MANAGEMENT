@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History</title>
+    <link rel="stylesheet" href="{% static 'history.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url '1' %}">Create Account</a></li>
+            <li><a href="{% url 'validate_pin' %}">Check Balance</a></li>
+            <li><a href="{% url 'transaction_history' id %}">Transaction History</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Account Holder: 
+            <h2 class="account-info">{{ account.FirstName }} {{ account.MiddleName }} {{ account.LastName }}</h2>
+        </h1>
+        <h1>Account No.: 
+            <h2 class="account-info">{{ account.account_number }}</h2>
+        </h1>
+        <h2>Transaction History</h2>
+        {% if transactions %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                        <tr>
+                            <td>{{ transaction.timestamp|date:"Y-m-d H:i" }}</td>
+                            <td>{{ transaction.transaction_type }}</td>
+                            <td>{{ transaction.amount }}</td>
+                            <td>{{ transaction.description }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No transactions found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

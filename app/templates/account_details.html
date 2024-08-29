@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Details</title>
+    <link rel="stylesheet" href="{% static 'history.css' %}">
+</head>
+<body>
+    <h1>Account Details</h1>
+    <p><strong>Account Number:</strong> {{ account.account_number }}</p>
+    <p><strong>Name:</strong> {{ account.FirstName }} {{ account.MiddleName }} {{ account.LastName }}</p>
+    <p><a href="{% url 'validate_pin' %}">Proceed to Validate PIN</a></p>
+</body>
+</html>

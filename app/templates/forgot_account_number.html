@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Account Number</title>
+    <link rel="stylesheet" href="{% static 'validate.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url '1' %}">Create Account</a></li>
+            <li><a href="{% url 'validate_pin' %}">Check Balance</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Forgot Account Number</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <h3>Enter your Aadhaar number</h3>
+            <input type="text" name="Adhaar_Number" placeholder="Enter Aadhaar Number">
+            <button type="submit">Submit</button>
+        </form>
+        
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

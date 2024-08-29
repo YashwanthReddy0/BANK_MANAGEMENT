@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw/Deposit/Transfer</title>
+    <link rel="stylesheet" href="{% static 'history.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            
+            <li><a href="{% url 'validate_pin' %}">CHECK BALANCE</a></li>
+            <li><a href="{% url 'validate_pin' %}">MAIN_PAGE</a></li>
+        </ul>
+    </nav>
+
+    <form action="" method="POST" style="text-align: center; border: 2px; width: 25%; position: absolute; left: 35%; top: 15%;">
+        {% csrf_token %}
+        <h3>Enter the Amount</h3>
+        <input type="number" name="Amount" required>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

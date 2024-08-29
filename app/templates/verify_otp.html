@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP</title>
+    <link rel="stylesheet" href="{% static 'history.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Verify OTP</h1>
+        {% if email %}
+            <p>The OTP has been sent to your email: <strong>{{ email }}</strong></p>
+        {% else %}
+            <p>Email not found in session. Please go back and try again.</p>
+        {% endif %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="otp-container">
+                <!-- Create 6 input fields for OTP -->
+                <input type="text" name="otp1" class="otp-input" maxlength="1" required>
+                <input type="text" name="otp2" class="otp-input" maxlength="1" required>
+                <input type="text" name="otp3" class="otp-input" maxlength="1" required>
+                <input type="text" name="otp4" class="otp-input" maxlength="1" required>
+                <input type="text" name="otp5" class="otp-input" maxlength="1" required>
+                <input type="text" name="otp6" class="otp-input" maxlength="1" required>
+            </div>
+            <button type="submit">Verify</button>
+        </form>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <script>
+        // Optional JavaScript to auto-focus the next input field
+        document.querySelectorAll('.otp-input').forEach((input, index, inputs) => {
+            input.addEventListener('input', () => {
+                if (input.value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+                if (input.value.length === 0 && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+    
+        // Timer logic
+        let timerDuration = 300; // 5 minutes in seconds
+        const timerDisplay = document.createElement('div');
+        timerDisplay.classList.add('timer');
+        document.querySelector('.container').appendChild(timerDisplay);
+    
+        function updateTimer() {
+            const minutes = Math.floor(timerDuration / 60);
+            const seconds = timerDuration % 60;
+            timerDisplay.textContent = `Time remaining: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            
+            if (timerDuration <= 0) {
+                clearInterval(timerInterval);
+                timerDisplay.textContent = 'Time expired!';
+            } else {
+                timerDuration--;
+            }
+        }
+    
+        const timerInterval = setInterval(updateTimer, 1000);
+        updateTimer(); // Initialize timer display immediately
+    </script>
+    
+    <script>
+        // Optional JavaScript to auto-focus the next input field
+        document.querySelectorAll('.otp-input').forEach((input, index, inputs) => {
+            input.addEventListener('input', () => {
+                if (input.value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+                if (input.value.length === 0 && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

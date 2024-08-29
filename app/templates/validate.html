@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Balance</title>
+    <link rel="stylesheet" href="{% static 'history.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url '1' %}">Create Account</a></li>
+            <li><a href="{% url 'validate_pin' %}">Check Balance</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Check Balance</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Check Balance</button>
+            <div class="button-container">
+                <a href="{% url 'forgot_pin' %}">
+                    <button type="button">FORGOT PIN</button>
+                </a>
+                <a href="{% url 'forgot_account_number' %}">
+                    <button type="button">FORGOT ACCOUNT NUMBER</button>
+                </a>
+            </div>
+        </form>
+        
+        {% if Balance is not None %}
+        <div class="balance-display">
+            <p>Your Balance is: Rs.{{ Balance }}</p>
+            <div class="button-container">
+                <a href="{% url 'withdraw' id %}">
+                    <button type="button" style="margin: 2px;">WithDraw Amount</button>
+                </a>
+                <a href="{% url 'deposit' id %}">
+                    <button type="button" style="margin: 2px;">Deposit Amount</button>
+                </a>
+                <a href="{% url 'transfer' id %}">
+                    <button type="button" style="margin: 2px;">Transfer Amount</button>
+                </a>
+                <a href="{% url 'transaction_history' id %}">
+                    <button type="button" style="margin: 2px;">Transaction History</button>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
